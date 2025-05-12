@@ -1,7 +1,7 @@
 function HomePage() {
   return (
     <div>
-      <h1>Film più famosi:</h1>
+      <h1 className="text-2xl font-semibold mb-4">Film più famosi:</h1>
     </div>
   );
 }
