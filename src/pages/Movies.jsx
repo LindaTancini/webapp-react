@@ -1,5 +1,5 @@
 //Importazioni
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 import axios from "axios";
 
@@ -11,11 +11,14 @@ function MoviesPage() {
     const url = "http://localhost:3000/api/movies";
     axios
       .get(url)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res.data);
+        setMovies(res.data);
+      })
       .catch((err) => console.log(err));
   }
 
-  getMovies();
+  useEffect(getMovies, []);
 
   return (
     <>
@@ -24,11 +27,7 @@ function MoviesPage() {
         <h2>Lista dei film:</h2>
         <div className="flex flex-wrap gap-4 justify-center">
           {movies.length ? (
-            movies.map((movie) => (
-              <div>
-                <MovieCard />
-              </div>
-            ))
+            movies.map((movie) => <MovieCard key={movie.id} data={movie} />)
           ) : (
             <div>Nessun Film trovato</div>
           )}
