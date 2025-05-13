@@ -1,5 +1,6 @@
 //Importazioni
 import { Link } from "react-router-dom";
+import StarRating from "./StarRating";
 
 function MovieCard({ data }) {
   const { id, imgPath, title, director, abstract, reviews_vote } = data;
@@ -11,7 +12,10 @@ function MovieCard({ data }) {
         <p className="text-gray-600 text-base mb-2">
           <span className="font-semibold">{director}</span>
         </p>
-        <p className="font-semibold"> Recensioni del film: {reviews_vote} </p>
+        <div className="font-semibold">
+          Recensioni del film:
+          <StarRating vote={reviews_vote} />
+        </div>
         <p className="text-gray-500 text-sm">{abstract}</p>
       </div>
       <div className="px-6 py-4">

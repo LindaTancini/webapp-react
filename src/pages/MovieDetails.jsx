@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ReviewCard from "../components/ReviewCard";
+import StarRating from "../components/StarRating";
 
 function MovieDetails() {
   const { id } = useParams();
@@ -55,7 +56,8 @@ function MovieDetails() {
               Le recensioni dei nostri utenti:
             </h3>
             <div className="text-pink-600 font-medium">
-              Vote: {movie.reviews_vote}
+              Average: {movie.reviews_vote}
+              <StarRating vote={movie.reviews_vote} />
             </div>
           </header>
           {reviews.length ? (

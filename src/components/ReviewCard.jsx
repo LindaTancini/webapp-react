@@ -1,3 +1,6 @@
+//Importazioni
+import StarRating from "./StarRating";
+
 function ReviewCard({ data }) {
   const { name, text, vote } = data;
 
@@ -8,7 +11,9 @@ function ReviewCard({ data }) {
         <p className="bg-pink-200 text-pink-900 text-sm font-semibold px-3 py-1 rounded-full">
           {text}
         </p>
-        <p className="text-pink-700">Vote: {vote}</p>
+        <div className="text-pink-700">
+          Vote: {vote} <StarRating vote={vote} />
+        </div>
       </div>
     </div>
   );
