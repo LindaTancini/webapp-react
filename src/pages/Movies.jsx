@@ -32,28 +32,27 @@ function MoviesPage() {
 
   return (
     <>
+      {/* Titolo */}
       <h1 className="text-4xl font-semibold text-center text-gray-800 mb-6">
-        Film
+        Lista dei film:
       </h1>
       <section className="p-6">
-        <h2 className="text-2xl font-bold text-gray-700 mb-4">
-          Lista dei film:
-        </h2>
-
+        {/* Form */}
         <form
           onSubmit={searchMovies}
-          className="flex justify-end items-center space-x-2  mb-6"
+          className="flex justify-end items-center space-x-2 mb-6"
         >
           <input
             type="text"
             placeholder="Cerca un film"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-64"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 w-64"
           />
+          {/* Bottone */}
           <button
             type="submit"
-            className="bg-blue-500 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="bg-pink-500 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-400"
           >
             Cerca
           </button>

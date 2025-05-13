@@ -1,30 +1,41 @@
-//Importazioni
+// Importazioni
 import { Link } from "react-router-dom";
 import StarRating from "./StarRating";
 
 function MovieCard({ data }) {
   const { id, imgPath, title, director, abstract, reviews_vote } = data;
   return (
-    <div className="max-w-xs rounded-lg overflow-hidden shadow-lg bg-white transform hover:scale-105 transition duration-300 ease-in-out">
-      <img src={imgPath} alt={title} className="rounded-t-lg" />
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2 text-gray-800">{title}</div>
-        <p className="text-gray-600 text-base mb-2">
-          <span className="font-semibold">{director}</span>
-        </p>
-        <div className="font-semibold">
-          Recensioni del film:
-          <StarRating vote={reviews_vote} />
-        </div>
-        <p className="text-gray-500 text-sm">{abstract}</p>
+    <div className="flex flex-col max-w-xs h-full rounded-2xl overflow-hidden shadow-lg bg-pink-100 transition transform hover:scale-105">
+      {/* Immagine */}
+      <div className="w-full aspect-[2/3] overflow-hidden bg-gray-200">
+        <img
+          src={imgPath}
+          alt={title}
+          className="w-full h-full object-cover object-top"
+        />
       </div>
-      <div className="px-6 py-4">
-        <Link
-          to={`/movies/${id}`}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out"
-        >
-          Scheda del film
-        </Link>
+      {/* Contenuto della card */}
+      <div className="flex flex-col justify-between flex-grow p-6">
+        <div>
+          <h2 className="text-xl font-bold text-pink-800 mb-2">{title}</h2>
+          <p className="text-pink-700 font-semibold mb-1">{director}</p>
+          <div className="mb-2">
+            <span className="font-semibold text-pink-700">
+              Recensioni del film:
+            </span>
+            <StarRating vote={reviews_vote} />
+          </div>
+          <p className="text-gray-700 text-sm">{abstract}</p>
+        </div>
+        {/* Bottone */}
+        <div className="mt-4">
+          <Link
+            to={`/movies/${id}`}
+            className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-lg text-center block transition duration-300 ease-in-out"
+          >
+            Scheda del film
+          </Link>
+        </div>
       </div>
     </div>
   );
