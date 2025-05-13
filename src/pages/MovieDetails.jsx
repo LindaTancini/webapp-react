@@ -2,10 +2,12 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ReviewCard from "../components/ReviewCard";
 
 function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
+  const [reviews, setReviews] = useState([]);
 
   //Axios
   function getMovie() {
@@ -13,7 +15,10 @@ function MovieDetails() {
     console.log(id);
     axios
       .get(url)
-      .then((res) => setMovie(res.data))
+      .then((res) => {
+        setMovie(res.data);
+        setReviews(res.data.reviews);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -44,12 +49,22 @@ function MovieDetails() {
         </header>
 
         {/* Recensioni */}
-        <section className="mt-10">
-          <header>
-            <h3 className="text-2xl font-semibold text-gray-800 border-b pb-2 mb-4">
+        <section id="reviews" className="mt-10">
+          <header className="flex justify-between items-center border-b pb-2 mb-4">
+            <h3 className="text-2xl font-semibold text-pink-800">
               Le recensioni dei nostri utenti:
             </h3>
+            <div className="text-pink-600 font-medium">
+              Vote: {movie.reviews_vote}
+            </div>
           </header>
+          {reviews.length ? (
+            reviews.map((review) => (
+              <ReviewCard data={review} key={review.id} />
+            ))
+          ) : (
+            <p className="text-pink-700 italic">Nessuna recensione trovata</p>
+          )}
         </section>
       </article>
     </>
