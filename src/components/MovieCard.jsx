@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 
 function MovieCard({ data }) {
-  const { id, imgPath, title, director, abstract } = data;
+  const { id, imgPath, title, director, abstract, reviews_vote } = data;
   return (
     <div className="max-w-xs rounded-lg overflow-hidden shadow-lg bg-white transform hover:scale-105 transition duration-300 ease-in-out">
       <img src={imgPath} alt={title} className="rounded-t-lg" />
@@ -11,6 +11,7 @@ function MovieCard({ data }) {
         <p className="text-gray-600 text-base mb-2">
           <span className="font-semibold">{director}</span>
         </p>
+        <p className="font-semibold"> Recensioni del film: {reviews_vote} </p>
         <p className="text-gray-500 text-sm">{abstract}</p>
       </div>
       <div className="px-6 py-4">
