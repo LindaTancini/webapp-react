@@ -70,7 +70,7 @@ function MovieDetails() {
           )}
         </section>
         <section className="mt-10">
-          <AddReview />
+          <AddReview movieId={id} refreshMovie={getMovie} />
         </section>
       </article>
     </>
