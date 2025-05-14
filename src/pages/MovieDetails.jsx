@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ReviewCard from "../components/ReviewCard";
 import StarRating from "../components/StarRating";
+import AddReview from "../components/AddReviews";
 
 function MovieDetails() {
   const { id } = useParams();
@@ -67,6 +68,9 @@ function MovieDetails() {
           ) : (
             <p className="text-pink-700 italic">Nessuna recensione trovata</p>
           )}
+        </section>
+        <section className="mt-10">
+          <AddReview />
         </section>
       </article>
     </>
