@@ -1,5 +1,5 @@
 //Importazioni
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ReviewCard from "../components/ReviewCard";
@@ -10,6 +10,7 @@ function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
   const [reviews, setReviews] = useState([]);
+  const navigate = useNavigate();
 
   //Axios
   function getMovie() {
@@ -48,6 +49,30 @@ function MovieDetails() {
           <p className="text-gray-700 text-base leading-relaxed">
             {movie?.abstract}
           </p>
+          <div>
+            {movie.id && (
+              <div className="flex justify-center gap-4 my-4">
+                <button
+                  onClick={() => navigate(`/movies/${movie.id - 1}`)}
+                  className="bg-pink-200 px-4 py-2 rounded-lg hover:bg-pink-300 cursor-pointer transition"
+                >
+                  Torna al film precedente! ❤️
+                </button>
+                <button
+                  onClick={() => navigate("/")}
+                  className="bg-pink-200  px-4 py-2 rounded-lg hover:bg-pink-300 cursor-pointer transition"
+                >
+                  Torna alla HomePage! ❤️
+                </button>
+                <button
+                  onClick={() => navigate(`/movies/${movie.id + 1}`)}
+                  className="bg-pink-200  px-4 py-2 rounded-lg hover:bg-pink-300 cursor-pointer transition"
+                >
+                  Vai al film successivo! ❤️
+                </button>
+              </div>
+            )}
+          </div>
         </header>
 
         {/* Recensioni */}
