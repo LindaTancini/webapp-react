@@ -1,16 +1,21 @@
-//Importazioni
 import { NavLink } from "react-router-dom";
 
 function Header() {
   return (
-    <header className="bg-pink-100 shadow-md py-4 px-6 flex justify-between items-center">
-      <div className="text-black">Logo</div>
+    <header className="bg-pink-800 shadow-md py-4 px-6 flex justify-between items-center">
+      <div className="text-pink-100 font-bold text-xl">
+        LiliMovie By Linda ♥
+      </div>
       <nav>
         <ul className="flex space-x-8 text-lg font-medium">
           <li>
             <NavLink
               to="/"
-              className="text-pink-700 hover:text-pink-900 transition duration-200"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-pink-100 underline underline-offset-4 transition duration-200"
+                  : "text-pink-300 hover:text-pink-100 transition duration-200"
+              }
             >
               HomePage
             </NavLink>
@@ -18,17 +23,25 @@ function Header() {
           <li>
             <NavLink
               to="/movies"
-              className="text-pink-700 hover:text-pink-900 transition duration-200"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-pink-100 underline underline-offset-4 transition duration-200"
+                  : "text-pink-300 hover:text-pink-100 transition duration-200"
+              }
             >
-              I nostri film!
+              I nostri film
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/add"
-              className="text-pink-700 hover:text-pink-900 transition duration-200"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-pink-100 underline underline-offset-4 transition duration-200"
+                  : "text-pink-300 hover:text-pink-100 transition duration-200"
+              }
             >
-              Aggiungi un film!
+              Aggiungi un film
             </NavLink>
           </li>
         </ul>
