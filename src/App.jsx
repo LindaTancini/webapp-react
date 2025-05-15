@@ -6,11 +6,18 @@ import MovieDetails from "./pages/MovieDetails";
 import DefaultLayout from "./layouts/DefaultLayout";
 import AddMovies from "./pages/AddMovies";
 import GlobalContext from "./contexts/GlobalContext";
+import { useState } from "react";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <>
-      <GlobalContext.Provider>
+      <GlobalContext.Provider
+        value={{
+          isLoading,
+          setIsLoading,
+        }}
+      >
         <BrowserRouter>
           <Routes>
             <Route element={<DefaultLayout />}>
