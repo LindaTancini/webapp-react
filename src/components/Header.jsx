@@ -20,7 +20,15 @@ function Header() {
               to="/movies"
               className="text-pink-700 hover:text-pink-900 transition duration-200"
             >
-              Movies
+              I nostri film!
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/add"
+              className="text-pink-700 hover:text-pink-900 transition duration-200"
+            >
+              Aggiungi un film!
             </NavLink>
           </li>
         </ul>
