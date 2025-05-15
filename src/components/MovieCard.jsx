@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import StarRating from "./StarRating";
 
 function MovieCard({ data }) {
-  const { id, imgPath, title, director, abstract, reviews_vote } = data;
+  const { imgPath, title, director, abstract, reviews_vote, slug } = data;
   return (
     <div className="flex flex-col max-w-xs h-full rounded-2xl overflow-hidden shadow-lg bg-pink-100 transition transform hover:scale-105">
       {/* Immagine */}
@@ -30,7 +30,7 @@ function MovieCard({ data }) {
         {/* Bottone */}
         <div className="mt-4">
           <Link
-            to={`/movies/${id}`}
+            to={`/movies/${slug}`}
             className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-lg text-center block transition duration-300 ease-in-out"
           >
             Scheda del film
