@@ -8,28 +8,44 @@ import AddReview from "../components/AddReviews";
 import GlobalContext from "../contexts/GlobalContext";
 
 function MovieDetails() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [movie, setMovie] = useState({});
   const [reviews, setReviews] = useState([]);
   const navigate = useNavigate();
   const { setIsLoading } = useContext(GlobalContext);
+  const [prevSlug, setPrevSlug] = useState(null);
+  const [nextSlug, setNextSlug] = useState(null);
 
   //Axios
   function getMovie() {
     setIsLoading(true);
-    const url = `http://localhost:3000/api/movies/${id}`;
-    console.log(id);
+    const url = `http://localhost:3000/api/movies/${slug}`;
+
     axios
       .get(url)
       .then((res) => {
         setMovie(res.data);
         setReviews(res.data.reviews);
       })
+      .then(() => {
+        // Chiamata per film precedente
+        return axios
+          .get(`http://localhost:3000/api/movies/${slug}/prev`)
+          .then((res) => setPrevSlug(res.data.slug))
+          .catch(() => setPrevSlug(null));
+      })
+      .then(() => {
+        // Chiamata per film successivo
+        return axios
+          .get(`http://localhost:3000/api/movies/${slug}/next`)
+          .then((res) => setNextSlug(res.data.slug))
+          .catch(() => setNextSlug(null));
+      })
       .catch((err) => console.log(err))
-      .finally(setIsLoading(false));
+      .finally(() => setIsLoading(false));
   }
 
-  useEffect(getMovie, [id]);
+  useEffect(getMovie, [slug]);
 
   return (
     <>
@@ -56,24 +72,28 @@ function MovieDetails() {
           <div>
             {movie.id && (
               <div className="flex justify-center gap-4 my-4">
-                <button
-                  onClick={() => navigate(`/movies/${movie.id - 1}`)}
-                  className="bg-pink-200 px-4 py-2 rounded-lg hover:bg-pink-300 cursor-pointer transition"
-                >
-                  Torna al film precedente! ❤️
-                </button>
+                {prevSlug && (
+                  <button
+                    onClick={() => navigate(`/movies/${prevSlug}`)}
+                    className="bg-pink-200 px-4 py-2 rounded-lg hover:bg-pink-300 cursor-pointer transition"
+                  >
+                    Torna al film precedente! ❤️
+                  </button>
+                )}
                 <button
                   onClick={() => navigate("/")}
                   className="bg-pink-200  px-4 py-2 rounded-lg hover:bg-pink-300 cursor-pointer transition"
                 >
                   Torna alla HomePage! ❤️
                 </button>
-                <button
-                  onClick={() => navigate(`/movies/${movie.id + 1}`)}
-                  className="bg-pink-200  px-4 py-2 rounded-lg hover:bg-pink-300 cursor-pointer transition"
-                >
-                  Vai al film successivo! ❤️
-                </button>
+                {nextSlug && (
+                  <button
+                    onClick={() => navigate(`/movies/${nextSlug}`)}
+                    className="bg-pink-200  px-4 py-2 rounded-lg hover:bg-pink-300 cursor-pointer transition"
+                  >
+                    Vai al film successivo! ❤️
+                  </button>
+                )}
               </div>
             )}
           </div>
@@ -99,7 +119,7 @@ function MovieDetails() {
           )}
         </section>
         <section className="mt-10">
-          <AddReview movieId={id} refreshMovie={getMovie} />
+          <AddReview movieId={movie.id} refreshMovie={getMovie} />
         </section>
       </article>
     </>
