@@ -3,15 +3,25 @@ import { NavLink } from "react-router-dom";
 
 function Header() {
   return (
-    <header className="bg-pink-100 text-white p-4 flex justify-between items-center">
+    <header className="bg-pink-100 shadow-md py-4 px-6 flex justify-between items-center">
       <div className="text-black">Logo</div>
-      <nav className="space-x-4">
-        <ul className="flex space-x-6 text-lg">
-          <li className="text-black">
-            <NavLink to="/">HomePage</NavLink>
+      <nav>
+        <ul className="flex space-x-8 text-lg font-medium">
+          <li>
+            <NavLink
+              to="/"
+              className="text-pink-700 hover:text-pink-900 transition duration-200"
+            >
+              HomePage
+            </NavLink>
           </li>
-          <li className="text-black">
-            <NavLink to="/movies">Movies</NavLink>
+          <li>
+            <NavLink
+              to="/movies"
+              className="text-pink-700 hover:text-pink-900 transition duration-200"
+            >
+              Movies
+            </NavLink>
           </li>
         </ul>
       </nav>
