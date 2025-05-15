@@ -84,3 +84,16 @@
 ### BONUS
 
 - Provare a creare un nuovo film con upload immagine (multer)!
+
+---
+
+## ULTIMO GIORNO
+
+### Creiamo un componente loader e il Context
+
+- Questo componente deve poter apparire su qualunque pagina della nostra app.
+- Creiamo e sfruttiamo un Context per dare la possibilità ad ogni componente di attivare o disattivare il loader sulla propria pagina
+
+### BONUS:
+
+- Provate a validare i campi dei vostri form!
