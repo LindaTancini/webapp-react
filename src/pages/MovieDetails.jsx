@@ -1,19 +1,22 @@
 //Importazioni
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import ReviewCard from "../components/ReviewCard";
 import StarRating from "../components/StarRating";
 import AddReview from "../components/AddReviews";
+import GlobalContext from "../contexts/GlobalContext";
 
 function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
   const [reviews, setReviews] = useState([]);
   const navigate = useNavigate();
+  const { setIsLoading } = useContext(GlobalContext);
 
   //Axios
   function getMovie() {
+    setIsLoading(true);
     const url = `http://localhost:3000/api/movies/${id}`;
     console.log(id);
     axios
@@ -22,7 +25,8 @@ function MovieDetails() {
         setMovie(res.data);
         setReviews(res.data.reviews);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(setIsLoading(false));
   }
 
   useEffect(getMovie, [id]);

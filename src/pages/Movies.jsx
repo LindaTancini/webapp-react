@@ -1,14 +1,17 @@
 //Importazioni
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 import axios from "axios";
+import GlobalContext from "../contexts/GlobalContext";
 
 function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
+  const { setIsLoading } = useContext(GlobalContext);
 
   //Axios
   function getMovies() {
+    setIsLoading(true);
     const url = "http://localhost:3000/api/movies";
     axios
       .get(url, {
@@ -18,7 +21,8 @@ function MoviesPage() {
         console.log(res.data);
         setMovies(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(setIsLoading(false));
   }
 
   //Ricerca di un film
